@@ -3,6 +3,8 @@
 
 void terminal_initialize(void) {
     terminal_buffer = (unsigned short *) VGA_ADDRESS;
+    vga_index = 0;
+    terminal_color = VGA_COLOR_WHITE;
     terminal_clear();
 }
 
@@ -11,23 +13,30 @@ void terminal_setcolor(unsigned char color) {
 }
 
 void terminal_putentryat(char c, unsigned char color, unsigned int x, unsigned int y) {
-    terminal_buffer[y * VGA_WIDTH + x] = (unsigned short) c;
+    const unsigned int index = y * VGA_WIDTH + x;
+    terminal_buffer[index] = (unsigned short) c | (unsigned short) color << 8;
 }
 
 void terminal_putchar(char c) {
+    static unsigned int vga_i = 0;
+    
     if (c == '\r') {
-        vga_index = vga_index - (vga_index % VGA_WIDTH);
+        vga_i = vga_i - (vga_i % VGA_WIDTH);
     } else if (c == '\b') {
-        vga_index--;
-        terminal_putentryat(' ', terminal_color, vga_index % VGA_WIDTH, vga_index / VGA_WIDTH);
+        if (vga_i > 0) {
+            vga_i--;
+            terminal_putentryat(' ', terminal_color, vga_i % VGA_WIDTH, vga_i / VGA_WIDTH);
+        }
     } else if (c == '\t') {
-        vga_index += 4;
+        vga_i += 4;
     } else if (c == '\n') {
-        vga_index += VGA_WIDTH;
+        vga_i += VGA_WIDTH;
     } else {
-        terminal_putentryat(c, terminal_color, vga_index % VGA_WIDTH, vga_index / VGA_WIDTH);
-        vga_index++;
+        terminal_putentryat(c, terminal_color, vga_i % VGA_WIDTH, vga_i / VGA_WIDTH);
+        vga_i++;
     }
+
+    vga_index = vga_i;
 }
 
 void terminal_write(const char *data, unsigned int size) {

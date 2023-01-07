@@ -23,7 +23,7 @@ extern "C" { /* Use C linkage for kernel_main. */
 
 void print(const char* str);
 void put_char(char c);
-char get_char();
+uint8_t get_char();
 
 size_t strlen(const char* str);
 int strcmp(const char* str1, const char* str2);

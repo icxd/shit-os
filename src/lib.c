@@ -1,5 +1,6 @@
 #include "include/lib.h"
 #include "include/vga.h"
+#include "include/utils.h"
 
 void print(const char* str) {
     terminal_writestring(str);
@@ -9,7 +10,11 @@ void put_char(char c) {
     terminal_putchar(c);
 }
 
-char get_char(void) { }
+uint8_t get_char(void) {
+    while (!key_pressed()) {}
+    uint8_t key = read_key();
+    return key;
+}
 
 size_t strlen(const char* str) {
     size_t len = 0;
