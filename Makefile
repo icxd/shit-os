@@ -2,7 +2,7 @@ CP := cp
 RM := rm -rf
 MKDIR := mkdir -pv
 
-SRC = src/$(wildcard *.c)
+SRC = $(wildcard src/*.c)
 OBJ = $(SRC:.c=.o)
 
 BIN = kernel
@@ -12,17 +12,20 @@ BOOT_PATH := $(ISO_PATH)/boot
 GRUB_PATH := $(BOOT_PATH)/grub
 
 .PHONY: all
-all: bootloader kernel # linker iso run
+all: bootloader kernel linker iso run
 	@echo Completed
 
 bootloader: boot.asm
 	nasm -f elf32 boot.asm -o boot.o
 
-kernel:
-	gcc -m32 -c $(SRC) -o kernel.o
+kernel: $(OBJ)
+	gcc -m32 -T linker.ld -o kernel -ffreestanding -O2 -nostdlib boot.o $(OBJ) -no-pie
 
-linker: linker.ld boot.o kernel.o
-	ld -m elf_i386 -T linker.ld -o kernel boot.o kernel.o
+$(OBJ): %.o: %.c
+	gcc -m32 -c $< -o $@ -Wall -Wextra -ffreestanding -m32 -c -O2 -nostdlib
+
+linker: linker.ld boot.o $(OBJ)
+	ld -m elf_i386 -T linker.ld -o kernel boot.o $(OBJ)
 
 iso: kernel
 	$(MKDIR) $(GRUB_PATH)
@@ -37,4 +40,3 @@ run: my-kernel.iso
 .PHONY: clean
 clean:
 	$(RM) *.o src/*.o *.iso *.bin *.elf $(BIN) *iso
-	

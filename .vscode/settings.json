@@ -1,6 +1,8 @@
 {
     "files.associations": {
         "lib.h": "c",
-        "stddef.h": "c"
+        "stddef.h": "c",
+        "kernel.h": "c",
+        "vga.h": "c"
     }
 }

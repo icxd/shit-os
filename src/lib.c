@@ -2,30 +2,33 @@
 #include "include/vga.h"
 
 void print(const char* str) {
-    int index = 0;
-    while (str[index]) {
-        put_char(str[index]);
-        index++;
-    }
+    terminal_writestring(str);
 }
 
 void put_char(char c) {
-    terminal_buffer[vga_index] = (unsigned short) c | (unsigned short) VGA_COLOR_WHITE << 8;
-    vga_index++;
+    terminal_putchar(c);
 }
 
-char get_char(void) {
-    return (char) terminal_buffer[vga_index];
+char get_char(void) { }
+
+size_t strlen(const char* str) {
+    size_t len = 0;
+    while (str[len]) {
+        len++;
+    }
+    return len;
 }
 
-// TODO: Implement these methods
-size_t strlen(const char* str) { }
 int strcmp(const char* str1, const char* str2) { }
+
 char* strcpy(char* dest, const char* src) { }
+
 char* strcat(char* dest, const char* src) { }
 
 void* malloc(size_t size) { }
+
 void free(void* ptr) { }
 
 size_t read(int fd, void* buf, size_t count) { }
+
 size_t write(int fd, const void* buf, size_t count) { }

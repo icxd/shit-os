@@ -7,10 +7,10 @@ section .multiboot
     dd - (0x1BADB002 + 0x0)
 
 section .text
-global start
+global _start
 extern kernel_main
 
-start:
+_start:
     cli
     mov esp, stack_space
     call kernel_main

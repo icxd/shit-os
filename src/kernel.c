@@ -5,7 +5,8 @@
 void kernel_main(void) {
     terminal_initialize();
 
-    print("Hello, world");
+    terminal_setcolor(VGA_COLOR_LIGHT_GREEN);
+    terminal_writestring("Hello, kernel World!\r");
 
     return;
 }

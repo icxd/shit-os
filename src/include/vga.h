@@ -2,6 +2,8 @@
 #define KERNEL_VGA_H
 
 #define VGA_ADDRESS 0xB8000
+#define VGA_WIDTH 80
+#define VGA_HEIGHT 25
 
 #define VGA_COLOR_BLACK 0
 #define VGA_COLOR_BLUE 1
@@ -24,8 +26,9 @@
 extern "C" { /* Use C linkage for kernel_main. */
 #endif
 
-unsigned short *terminal_buffer;
-unsigned int vga_index;
+static unsigned short *terminal_buffer;
+static unsigned int vga_index;
+static unsigned char terminal_color;
 
 void terminal_initialize(void);
 void terminal_setcolor(unsigned char color);
@@ -33,6 +36,7 @@ void terminal_putentryat(char c, unsigned char color, unsigned int x, unsigned i
 void terminal_putchar(char c);
 void terminal_write(const char *data, unsigned int size);
 void terminal_writestring(const char *data);
+void terminal_clear(void);
 
 #ifdef __cplusplus
 }
