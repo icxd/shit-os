@@ -23,7 +23,7 @@ extern "C" { /* Use C linkage for kernel_main. */
 
 void print(const char* str);
 void put_char(char c);
-uint8_t get_char();
+char get_char();
 
 size_t strlen(const char* str);
 int strcmp(const char* str1, const char* str2);
@@ -32,6 +32,9 @@ char* strcat(char* dest, const char* src);
 
 void* malloc(size_t size);
 void free(void* ptr);
+
+void* memcpy(void* dest, const void* src, size_t n);
+void* memset(void* ptr, int value, size_t num);
 
 size_t read(int fd, void* buf, size_t count);
 size_t write(int fd, const void* buf, size_t count);

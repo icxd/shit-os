@@ -4,6 +4,7 @@
         "stddef.h": "c",
         "kernel.h": "c",
         "vga.h": "c",
-        "stdlib.h": "c"
+        "stdlib.h": "c",
+        "driver.h": "c"
     }
 }
