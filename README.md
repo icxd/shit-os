@@ -1,9 +1,13 @@
+<div align="center">
+
 # shit os
+
+Shit OS is an operating system made because I was bored or whatever, idfk.
+
+</div>
 
 > **Note**
 > This operating system is a fucking joke and should not be used for any sort of serious purposes, as it is not secure and is not even close to being finished. It is also not very well documented, so you're on your own if you want to use it. It will also blue screen if literally anything goes wrong, so don't expect it to be stable.
-
-Shit OS is an operating system made because I was bored or whatever, idfk.
 
 ## 🛠️ Building
 
