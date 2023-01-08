@@ -29,6 +29,7 @@ size_t strlen(const char* str);
 int strcmp(const char* str1, const char* str2);
 char* strcpy(char* dest, const char* src);
 char* strcat(char* dest, const char* src);
+char* strdup(const char* str);
 
 void* malloc(size_t size);
 void free(void* ptr);

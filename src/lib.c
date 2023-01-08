@@ -59,7 +59,16 @@ char* strcat(char* dest, const char* src) {
     return dest;
 }
 
-void* malloc(size_t size) { return heap_alloc(size); }
+char* strdup(const char* str) {
+    size_t len = strlen(str);
+    char* new_str = (char*) malloc(len + 1);
+    strcpy(new_str, str);
+    return new_str;
+}
+
+void* malloc(size_t size) {
+    return heap_alloc(size);
+}
 
 void free(void* ptr) { heap_free(ptr); }
 
