@@ -23,7 +23,18 @@ Shit OS is an operating system made because I was bored or whatever, idfk.
 
 ### 🐧 Linux
 
+> **Note**
+> This has only been tested on an Ubuntu virtual machine, other Linux distributions may not work.
+
+#### 🐧 Debian/Ubuntu
+
 1. Install the dependencies: `sudo apt install build-essential nasm qemu-system-x86`
+2. Run `make` to build the kernel
+3. Run `make run` to run the kernel in QEMU
+
+#### 🐧 Arch Linux
+
+1. Install the dependencies: `sudo pacman -S base-devel nasm qemu`
 2. Run `make` to build the kernel
 3. Run `make run` to run the kernel in QEMU
 
