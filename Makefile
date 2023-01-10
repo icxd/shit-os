@@ -12,7 +12,7 @@ BOOT_PATH := $(ISO_PATH)/boot
 GRUB_PATH := $(BOOT_PATH)/grub
 
 .PHONY: all
-all: bootloader kernel linker iso run
+all: bootloader kernel linker iso
 	@echo Completed
 
 bootloader: boot.asm
